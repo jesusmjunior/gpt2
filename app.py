@@ -31,18 +31,31 @@ tabs = st.tabs(["📋 Blocos", "🔁 Fluxo", "📊 Fuzzy α → θ", "📄 Expor
 with tabs[0]:
     for bloco in gpt_data["blocos_funcionais"]:
         with st.expander(f"🔹 {bloco['nome']} ({bloco['tipo']})"):
-            st.markdown(f"📝 {bloco['descricao']}")
-            st.write("🔬 Pertinência S(x):", bloco["S(x)"])
-            st.json(bloco["fuzzy"])
+            col1, col2 = st.columns([1, 1])
+            with col1:
+                st.markdown(f"**🆔 ID do Bloco:** `{bloco['id']}`")
+                st.markdown(f"**🔖 Tipo:** `{bloco['tipo']}`")
+                st.markdown(f"**📝 Descrição:** {bloco['descricao']}")
+                st.markdown(f"**🎯 Pertinência S(x):** `{bloco['S(x)']}`")
+            with col2:
+                st.markdown("**📊 Parâmetros Fuzzy α → θ**")
+                fuzzy_data = pd.DataFrame(
+                    [{"Parâmetro": k, "Valor": v} for k, v in bloco["fuzzy"].items()]
+                )
+                st.table(fuzzy_data.set_index("Parâmetro"))
 
 # === FLUXO ===
 with tabs[1]:
     st.subheader("🔗 Fluxo de Blocos")
-    dot_source = "digraph fluxo {\nrankdir=LR;\n"
+    dot_source = "digraph fluxo {
+rankdir=LR;
+"
     for b in gpt_data["blocos_funcionais"]:
-        dot_source += f'{b["id"]} [label="{b["nome"]}"];\n'
+        dot_source += f'{b["id"]} [label="{b["nome"]}"];
+'
     for origem, destino in gpt_data["conexoes"]:
-        dot_source += f"{origem} -> {destino};\n"
+        dot_source += f"{origem} -> {destino};
+"
     dot_source += "}"
     st.graphviz_chart(dot_source)
 
@@ -105,17 +118,10 @@ with tabs[3]:
       background: #ecf0f1;
       border-radius: 6px;
     }}
-    .bloco span.tipo {{
-      font-weight: bold;
-      color: #2980b9;
-    }}
     .fuzzy {{
       font-size: 13px;
       margin-top: 5px;
       color: #555;
-    }}
-    .legenda, .metrica {{
-      margin-top: 2em;
     }}
     footer {{
       margin-top: 3cm;
@@ -138,7 +144,7 @@ with tabs[3]:
 
   <h1>📋 Fluxo de Processo</h1>
   {blocos_html}
-  <section class="legenda">
+  <section>
     <h2>📈 Fluxo entre Blocos</h2>
     <p>{fluxo_txt}</p>
   </section>
