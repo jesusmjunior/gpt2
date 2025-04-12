@@ -350,8 +350,7 @@ try:
 with open(selected_gpt, encoding='utf-8') as f:
 dados = json.load(f)
 if not "nome_do_gpt" in dados:
-st.error("O arquivo JSON selecionado não contém a estrutura necessária para um
-GPT.")
+st.error("O arquivo JSON selecionado não contém a estrutura necessária para um GPT.")
 return None
 # T(a): Display GPT metadata
 st.markdown(f"## 🤖 {dados.get('nome_do_gpt', 'GPT sem nome')}")
