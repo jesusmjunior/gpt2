@@ -363,8 +363,7 @@ unsafe_allow_html=True)
 st.markdown(f"**Categoria:** {categoria}", unsafe_allow_html=True)
 st.markdown("</div>", unsafe_allow_html=True)
 # T(a): Render visualization tabs
-tab_details, tab_blocks, tab_actions = st.tabs(["Detalhes", "Blocos Funcionais", "Ações
-Rápidas"])
+tab_details, tab_blocks, tab_actions = st.tabs(["Detalhes", "Blocos Funcionais", "Ações"])
 with tab_details:
 render_gpt_details(dados)
 with tab_blocks:
