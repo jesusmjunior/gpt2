@@ -5,6 +5,7 @@ from graphviz import Digraph
 from datetime import datetime
 import base64
 from PIL import Image
+import pandas as pd
 
 st.set_page_config(
     page_title="📲 MY GPTs — Catálogo Interativo",
@@ -31,7 +32,7 @@ with col2:
     """)
 
 # Carregar JSON externo
-json_path = "gpt_fluxo_normas.json"
+json_path = "GPT_002.json"
 if not os.path.exists(json_path):
     st.error(f"Arquivo {json_path} não encontrado.")
     st.stop()
@@ -39,22 +40,49 @@ if not os.path.exists(json_path):
 with open(json_path, "r", encoding="utf-8") as f:
     catalogo = json.load(f)
 
-# Renderizar fluxo visual
+# Renderizar tabs
 st.header(f"🔷 {catalogo['nome_do_gpt']}")
 st.markdown(f"**Categoria:** {catalogo['categoria']}  ")
 st.markdown(f"**Função Principal:** {catalogo['função_principal']}")
 
-grafo = Digraph("Grafo GPT", format="png")
-grafo.attr(rankdir='LR', size='10')
-grafo.node("GPT", catalogo['nome_do_gpt'], shape='folder', style='filled', fillcolor='lightblue')
+tab1, tab2, tab3 = st.tabs(["🔗 Fluxograma", "📋 Lista de Blocos", "📊 Matriz de Conexões"])
 
-for bloco in catalogo['blocos_funcionais']:
-    grafo.node(bloco['id'], bloco['texto'], shape='box', style='filled', fillcolor='lightgrey')
+# === TAB 1: FLUXOGRAMA ===
+with tab1:
+    grafo = Digraph("Grafo GPT", format="png")
+    grafo.attr(rankdir='TB', size='8')
+    tipo_cor = {
+        "inicio": "#d5f5e3",
+        "ação": "#d6eaf8",
+        "output": "#fdedec",
+        "validação": "#fef9e7",
+        "fim": "#fadbd8"
+    }
+    for bloco in catalogo['blocos_funcionais']:
+        cor = tipo_cor.get(bloco['tipo'], '#f2f2f2')
+        grafo.node(bloco['id'], bloco['texto'], shape='box', style='filled', fillcolor=cor)
+    for origem, destino in catalogo['conexoes']:
+        grafo.edge(origem, destino)
+    st.graphviz_chart(grafo, use_container_width=True)
 
-for origem, destino in catalogo['conexoes']:
-    grafo.edge(origem, destino)
+# === TAB 2: LISTAGEM ===
+with tab2:
+    for bloco in catalogo['blocos_funcionais']:
+        st.markdown(f"**{bloco['id'].upper()} — {bloco['tipo'].capitalize()}**")
+        st.markdown(bloco['texto'].replace("\n", "<br>"), unsafe_allow_html=True)
+        st.markdown("---")
 
-st.graphviz_chart(grafo)
+# === TAB 3: MATRIZ DE CONEXÕES ===
+with tab3:
+    blocos = [b['id'] for b in catalogo['blocos_funcionais']]
+    matriz = []
+    for origem in blocos:
+        linha = {"De/Para": origem}
+        for destino in blocos:
+            linha[destino] = "✅" if [origem, destino] in catalogo['conexoes'] else ""
+        matriz.append(linha)
+    df = pd.DataFrame(matriz)
+    st.dataframe(df, use_container_width=True)
 
 # Exportação JSON e HTML
 st.download_button(
