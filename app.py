@@ -1,8 +1,10 @@
-# === app.py - Catálogo de MyGPTs ADM. JESUS MARTINS ===
+
+# === app.py - Catálogo de MyGPTs ADM. JESUS MARTINS (com HTML robusto) ===
 import streamlit as st
 import json
 import os
 import pandas as pd
+from datetime import datetime
 
 st.set_page_config("🧠 Catálogo de MyGPTs", layout="wide")
 
@@ -47,12 +49,17 @@ with tabs[0]:
 # === FLUXO ===
 with tabs[1]:
     st.subheader("🔗 Fluxo de Blocos")
-    dot_source = "digraph fluxo {\n  rankdir=LR;\n"
+    dot_source = "digraph fluxo {
+  rankdir=LR;
+"
     for b in gpt_data["blocos_funcionais"]:
-        dot_source += f'  {b["id"]} [label="{b["nome"]}"];\n'
+        dot_source += f'  {b["id"]} [label="{b["nome"]}"];
+'
     for origem, destino in gpt_data["conexoes"]:
-        dot_source += f"  {origem} -> {destino};\n"
-    dot_source += "}\n"
+        dot_source += f"  {origem} -> {destino};
+"
+    dot_source += "}
+"
     st.graphviz_chart(dot_source)
 
 # === FUZZY α → θ ===
@@ -67,94 +74,148 @@ with tabs[3]:
     def gerar_html(gpt):
         def bloco_html(b):
             return f"""
-            <div class="bloco {b['tipo']}" data-id="{b['id']}">
-              <strong>{b['nome']}</strong>
-              <p>{b['descricao']}</p>
-              <div class="fuzzy">S(x): {b['S(x)']} | α: {b['fuzzy']['α']} | β: {b['fuzzy']['β']} | γ: {b['fuzzy']['γ']} | δ: {b['fuzzy']['δ']} | ε: {b['fuzzy']['ε']} | θ: {b['fuzzy']['θ']}</div>
-            </div>"""
-
+      <div class='bloco'>
+        <strong>🔹 {b['nome']} ({b['tipo']})</strong>
+        <div class='descricao'>📝 {b['descricao']}</div>
+        <div class='fuzzy'>
+          🆔 ID: <code>{b['id']}</code><br/>
+          🎯 S(x): <b>{b['S(x)']}</b><br/>
+          <span>α: {b['fuzzy']['α']}</span>
+          <span>β: {b['fuzzy']['β']}</span>
+          <span>γ: {b['fuzzy']['γ']}</span>
+          <span>δ: {b['fuzzy']['δ']}</span>
+          <span>ε: {b['fuzzy']['ε']}</span>
+          <span>θ: {b['fuzzy']['θ']}</span>
+        </div>
+      </div>"""
         blocos_html = "\n".join([bloco_html(b) for b in gpt["blocos_funcionais"]])
-        fluxo_txt = " → ".join([gpt["blocos_funcionais"][0]["nome"]] +
-                               [b["nome"] for b in gpt["blocos_funcionais"][1:]])
+        fluxo_txt = " → ".join([b["nome"] for b in gpt["blocos_funcionais"]])
+        media = pd.DataFrame([b["fuzzy"] for b in gpt["blocos_funcionais"]]).mean().round(2)
+        media_s = round(sum(b["S(x)"] for b in gpt["blocos_funcionais"]) / len(gpt["blocos_funcionais"]), 2)
 
         return f"""<!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <title>MY GPTS – Catalogação</title>
+  <title>🧠 MY GPTS – Catálogo Institucional</title>
   <style>
     body {{
       font-family: 'Segoe UI', sans-serif;
-      margin: 2cm;
-      background: #fff;
+      margin: 2.5cm;
+      background: #ffffff;
       color: #2c3e50;
+      line-height: 1.6;
     }}
     header {{
-      border-bottom: 3px solid #2e86de;
-      margin-bottom: 2em;
+      border-bottom: 4px solid #2e86de;
+      padding-bottom: 15px;
+      margin-bottom: 30px;
     }}
     .logo {{
       font-weight: bold;
-      font-size: 20px;
+      font-size: 22px;
       color: #154360;
     }}
-    .institucional {{
+    .subtitulo {{
       font-size: 14px;
-      margin-top: 5px;
-      color: #2c3e50;
+      color: #5d6d7e;
+      margin-top: 4px;
     }}
     h1 {{
-      font-size: 22px;
-      margin-top: 1.5em;
+      font-size: 28px;
+      color: #1b2631;
+    }}
+    h2 {{
+      font-size: 20px;
+      margin-top: 40px;
+      color: #273746;
     }}
     .bloco {{
-      padding: 1em;
-      margin-top: 1em;
-      border-left: 5px solid #3498db;
-      background: #ecf0f1;
-      border-radius: 6px;
+      border-left: 6px solid #3498db;
+      background: #f8f9f9;
+      padding: 16px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }}
+    .bloco strong {{
+      font-size: 17px;
+      color: #1f618d;
+    }}
+    .descricao {{
+      font-weight: bold;
+      margin-top: 6px;
     }}
     .fuzzy {{
+      margin-top: 10px;
       font-size: 13px;
-      margin-top: 5px;
-      color: #555;
+      color: #444;
+      padding-left: 10px;
+    }}
+    .fuzzy span {{
+      display: inline-block;
+      min-width: 60px;
     }}
     footer {{
-      margin-top: 3cm;
+      margin-top: 50px;
       font-size: 11px;
+      text-align: center;
       color: #7f8c8d;
       border-top: 1px solid #ccc;
-      padding-top: 0.5cm;
+      padding-top: 15px;
+    }}
+    .fluxo {{
+      background: #f0f3f4;
+      padding: 10px;
+      border-left: 4px solid #2e86de;
+      border-radius: 5px;
+    }}
+    .tabela {{
+      margin-top: 15px;
+      border-collapse: collapse;
+      width: 100%;
+    }}
+    .tabela th, .tabela td {{
+      border: 1px solid #bbb;
+      padding: 6px 12px;
       text-align: center;
+    }}
+    .tabela th {{
+      background: #d6eaf8;
     }}
   </style>
 </head>
 <body>
   <header>
     <div class="logo">ADM. JESUS MARTINS</div>
-    <div class="institucional">
-      MY GPTS – Catálogo de Blocos Funcionais Inteligentes<br>
-      Gerado a partir de modelos JSON estruturados
-    </div>
+    <div class="subtitulo">Plataforma Institucional de Catalogação de MyGPTs</div>
   </header>
 
-  <h1>📋 Fluxo de Processo</h1>
+  <h1>🧠 MyGPT: {gpt['nome_do_gpt']}</h1>
+  <h2>📚 Categoria: {gpt['categoria']}</h2>
+
   {blocos_html}
-  <section>
-    <h2>📈 Fluxo entre Blocos</h2>
-    <p>{fluxo_txt}</p>
-  </section>
+
+  <h2>📈 Fluxo entre Blocos</h2>
+  <div class="fluxo">{fluxo_txt}</div>
+
+  <h2>📊 Média α → θ</h2>
+  <table class="tabela">
+    <tr><th>α</th><th>β</th><th>γ</th><th>δ</th><th>ε</th><th>θ</th><th>S(x)</th></tr>
+    <tr>
+      <td>{media['α']}</td><td>{media['β']}</td><td>{media['γ']}</td><td>{media['δ']}</td>
+      <td>{media['ε']}</td><td>{media['θ']}</td><td><b>{media_s}</b></td>
+    </tr>
+  </table>
 
   <footer>
-    Relatório gerado automaticamente por MY GPTS – Plataforma ADM. JESUS MARTINS<br>
-    Data: 12/04/2025
+    Documento institucional gerado por MY GPTS – ADM. JESUS MARTINS<br>
+    {datetime.now().strftime("%d/%m/%Y %H:%M")}
   </footer>
 </body>
 </html>"""
 
     html_code = gerar_html(gpt_data)
     st.download_button("📥 Baixar HTML Institucional", data=html_code, file_name="catalogo_mygpt.html", mime="text/html")
-    st.code(html_code, language="html")
 
 # === EXPORTAÇÃO JSON SEMÂNTICO ===
 st.markdown("---")
