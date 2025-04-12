@@ -1,4 +1,3 @@
-# === Streamlit App para Catalogar e Exibir MyGPTs (contexto: COGEX) ===
 import streamlit as st
 import json
 import os
