@@ -1,58 +1,128 @@
-# -*- coding: utf-8 -*-
 import streamlit as st
 import json
-import zipfile
 import os
-import tempfile
+from graphviz import Digraph
+from datetime import datetime
+import base64
+from PIL import Image
 
-st.set_page_config(page_title="Validador de GPTs", layout="wide")
-st.title("📦 Visualizador e Validador de GPTs Inteligentes")
+st.set_page_config(
+    page_title="📲 MY GPTs — Catálogo Interativo",
+    layout="wide"
+)
 
-# Upload do arquivo ZIP
-uploaded_file = st.file_uploader("Selecione um arquivo .zip com os JSONs:", type=["zip"])
+# Cabeçalho com logomarca
+col1, col2 = st.columns([1, 5])
+with col1:
+    if os.path.exists("mygpts.png"):
+        st.image("mygpts.png", width=100)
+    else:
+        st.markdown("📲")
 
-if uploaded_file:
-    with tempfile.TemporaryDirectory() as tmpdir:
-        zip_path = os.path.join(tmpdir, "uploaded.zip")
-        with open(zip_path, "wb") as f:
-            f.write(uploaded_file.read())
+with col2:
+    st.title("📲 MY GPTs — Catálogo Interativo de Inteligências Pessoais")
+    st.markdown("""
+    Organizado por Ramos de Atividade (S(s))  
+    Cada GPT é uma Entidade Funcional (T(a)) com:
 
-        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-            zip_ref.extractall(tmpdir)
-            json_files = [f for f in zip_ref.namelist() if f.endswith(".json")]
+    - Nome (núcleo nominal/verbal)  
+    - Pertencimento lógico-fuzzy (γ)  
+    - Breve descrição funcional
+    """)
 
-        selected_json = st.selectbox("📂 Escolha um arquivo JSON para visualizar:", json_files)
+# JSON atualizado
+catalogo = {
+  "nome_do_gpt": "GPT - Implementador de Normas Inteligentes",
+  "categoria": "Automação com Inteligência Jurídica",
+  "função_principal": "Auxiliar na disseminação normativa baseada em provimentos oficiais com ações de publicação, atualização e acompanhamento",
+  "blocos_funcionais": [
+    {
+      "id": "start",
+      "tipo": "inicio",
+      "texto": "Início – Ativação do GPT com base em Provimento nº 10/2024"
+    },
+    {
+      "id": "b1",
+      "tipo": "ação",
+      "texto": "1. Análise e Consolidação Técnica\n- Geração de parecer normativo\n- Estruturação do texto jurídico"
+    },
+    {
+      "id": "b2",
+      "tipo": "output",
+      "texto": "2. Comunicação Oficial\n- Elaboração de post + ofício automatizado\n- Criação de conteúdos visuais e explicativos"
+    },
+    {
+      "id": "b3",
+      "tipo": "validação",
+      "texto": "3. Atualização de Modelos\n- Inserção em roteiros de GPT Fiscalizador\n- Validação semântica das regras"
+    },
+    {
+      "id": "b4",
+      "tipo": "ação",
+      "texto": "4. Acompanhamento e Adaptação\n- Análise dos prompts recebidos\n- Ajustes conforme feedback normativo"
+    },
+    {
+      "id": "end",
+      "tipo": "fim",
+      "texto": "Encerramento – GPT pronto para replicação normativa inteligente"
+    }
+  ],
+  "conexoes": [
+    ["start", "b1"],
+    ["b1", "b2"],
+    ["b2", "b3"],
+    ["b3", "b4"],
+    ["b4", "end"]
+  ]
+}
 
-        if selected_json:
-            json_path = os.path.join(tmpdir, selected_json)
-            try:
-                with open(json_path, "r", encoding="utf-8") as f:
-                    data = json.load(f)
+# Renderizar fluxo visual
+st.header(f"🔷 {catalogo['nome_do_gpt']}")
+st.markdown(f"**Categoria:** {catalogo['categoria']}  ")
+st.markdown(f"**Função Principal:** {catalogo['função_principal']}")
 
-                # Verificação de estrutura mínima
-                if not all(k in data for k in ["nome_do_gpt", "categoria", "blocos_funcionais", "conexoes"]):
-                    st.error("❌ Estrutura JSON inválida. Esperado: nome_do_gpt, categoria, blocos_funcionais, conexoes.")
-                else:
-                    tab1, tab2, tab3 = st.tabs(["📄 Detalhes", "🧩 Blocos Funcionais", "🔗 Conexões"])
+grafo = Digraph("Grafo GPT", format="png")
+grafo.attr(rankdir='LR', size='10')
+grafo.node("GPT", catalogo['nome_do_gpt'], shape='folder', style='filled', fillcolor='lightblue')
 
-                    with tab1:
-                        st.subheader("📘 Detalhes do GPT")
-                        st.write(f"**Nome do GPT:** {data['nome_do_gpt']}")
-                        st.write(f"**Categoria:** {data['categoria']}")
+for bloco in catalogo['blocos_funcionais']:
+    grafo.node(bloco['id'], bloco['texto'], shape='box', style='filled', fillcolor='lightgrey')
+    if bloco['id'] != "GPT":
+        grafo.edge("GPT" if bloco['id'] == "start" else None, bloco['id'])
 
-                    with tab2:
-                        st.subheader("🔧 Blocos Funcionais")
-                        for bloco in data["blocos_funcionais"]:
-                            with st.expander(f"{bloco['id']} | {bloco['nome']} ({bloco['tipo']})"):
-                                st.write(f"📄 **Descrição**: {bloco['descricao']}")
-                                st.write("📊 **Fuzzy Scores**:")
-                                st.json(bloco["fuzzy"])
-                                st.write(f"🧮 **S(x):** `{bloco['S(x)']}`")
+for origem, destino in catalogo['conexoes']:
+    grafo.edge(origem, destino)
 
-                    with tab3:
-                        st.subheader("🔁 Conexões entre Blocos")
-                        for origem, destino in data["conexoes"]:
-                            st.markdown(f"`{origem}` ➡️ `{destino}`")
+st.graphviz_chart(grafo)
 
-            except Exception as e:
-                st.error(f"Erro ao processar o JSON: {str(e)}")
+# Exportação JSON e HTML
+st.download_button(
+    label="📥 Baixar JSON Técnico",
+    data=json.dumps(catalogo, ensure_ascii=False, indent=2),
+    file_name="gpt_fluxo_normas.json",
+    mime="application/json"
+)
+
+def exportar_html():
+    html = f"<html><head><meta charset='utf-8'><title>{catalogo['nome_do_gpt']}</title></head><body>"
+    html += f"<h1>{catalogo['nome_do_gpt']}</h1>"
+    html += f"<h3>Categoria: {catalogo['categoria']}</h3>"
+    html += f"<p>{catalogo['função_principal']}</p><hr>"
+    for bloco in catalogo['blocos_funcionais']:
+        html += f"<h4>{bloco['id'].upper()} — {bloco['tipo'].capitalize()}</h4><pre>{bloco['texto']}</pre><hr>"
+    html += "</body></html>"
+    return html
+
+st.download_button(
+    label="📄 Exportar HTML Institucional",
+    data=exportar_html(),
+    file_name="gpt_fluxo_normas.html",
+    mime="text/html"
+)
+
+st.markdown("""
+---
+📌 Powered by Lógica Modular Fuzzy α → θ  
+🧩 T(a) → S(s) → P(p) com pesos γ (pertencimento semântico)  
+📤 Desenvolvido para gestão e visualização dos seus GPTs pessoais
+""")
