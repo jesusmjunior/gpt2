@@ -1,9 +1,8 @@
-# === app.py - Catálogo e Visualização de MyGPTs com lógica fuzzy α → θ ===
+# === app.py - Compatível com Streamlit Cloud ===
 import streamlit as st
 import json
 import os
 import pandas as pd
-from graphviz import Digraph
 
 st.set_page_config("🧠 Catálogo de MyGPTs", layout="wide")
 
@@ -25,7 +24,7 @@ with open(arquivo_escolhido, encoding='utf-8') as f:
 st.header(f"📌 Nome: {gpt_data['nome_do_gpt']}")
 st.subheader(f"📚 Categoria: {gpt_data['categoria']}")
 
-# === Tabs: Blocos, Fluxo, Fuzzy ===
+# === Tabs ===
 tabs = st.tabs(["📋 Blocos", "🔁 Fluxo", "📊 Fuzzy α → θ"])
 
 with tabs[0]:
@@ -37,13 +36,13 @@ with tabs[0]:
 
 with tabs[1]:
     st.subheader("🔗 Fluxo de Blocos")
-    graph = Digraph("fluxo", format="png")
-    graph.attr(rankdir="LR")
+    dot_source = "digraph fluxo {\nrankdir=LR;\n"
     for b in gpt_data["blocos_funcionais"]:
-        graph.node(b["id"], f"{b['nome']}")
-    for c in gpt_data["conexoes"]:
-        graph.edge(c[0], c[1])
-    st.graphviz_chart(graph)
+        dot_source += f'{b["id"]} [label="{b["nome"]}"];\n'
+    for origem, destino in gpt_data["conexoes"]:
+        dot_source += f"{origem} -> {destino};\n"
+    dot_source += "}"
+    st.graphviz_chart(dot_source)
 
 with tabs[2]:
     df_fuzzy = pd.DataFrame([
@@ -51,10 +50,10 @@ with tabs[2]:
     ])
     st.dataframe(df_fuzzy.set_index("Bloco"))
 
-# === Exportação JSON Técnico ===
+# === Exportação ===
 st.markdown("---")
-st.subheader("📤 Exportar MyGPT com pontuação α → θ")
-if st.button("🔽 Exportar JSON Semântico"):
+st.subheader("📤 Exportar JSON Semântico")
+if st.button("🔽 Baixar"):
     export_data = {
         "nome_do_gpt": gpt_data["nome_do_gpt"],
         "categoria": gpt_data["categoria"],
@@ -62,8 +61,8 @@ if st.button("🔽 Exportar JSON Semântico"):
         "blocos": gpt_data["blocos_funcionais"],
         "conexoes": gpt_data["conexoes"]
     }
-    export_file = f"{gpt_data['nome_do_gpt'].replace(' ', '_')}_semantico.json"
-    with open(export_file, "w", encoding="utf-8") as f:
-        json.dump(export_data, f, ensure_ascii=False, indent=2)
-    with open(export_file, "rb") as f:
-        st.download_button("📥 Baixar JSON", f, file_name=export_file)
+    nome_export = f"{gpt_data['nome_do_gpt'].replace(' ', '_')}_semantico.json"
+    with open(nome_export, "w", encoding="utf-8") as f:
+        json.dump(export_data, f, indent=2, ensure_ascii=False)
+    with open(nome_export, "rb") as f:
+        st.download_button("📥 Baixar Arquivo", f, file_name=nome_export)
