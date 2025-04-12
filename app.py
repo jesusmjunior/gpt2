@@ -105,3 +105,103 @@ if st.button("🔽 Baixar JSON"):
         json.dump(export_data, f, indent=2, ensure_ascii=False)
     with open(nome_export, "rb") as f:
         st.download_button("📥 Baixar JSON", f, file_name=nome_export)
+        with tabs[3]:
+    def gerar_html(gpt):
+        def bloco_html(b):
+            return f"""
+            <div class="bloco {b['tipo']}" data-id="{b['id']}">
+              <strong>{b['nome']}</strong>
+              <p>{b['descricao']}</p>
+              <div class="fuzzy">S(x): {b['S(x)']} | α: {b['fuzzy']['α']} | β: {b['fuzzy']['β']} | γ: {b['fuzzy']['γ']} | δ: {b['fuzzy']['δ']} | ε: {b['fuzzy']['ε']} | θ: {b['fuzzy']['θ']}</div>
+            </div>"""
+
+        blocos_html = "\n".join([bloco_html(b) for b in gpt["blocos_funcionais"]])
+        fluxo_txt = " → ".join([gpt["blocos_funcionais"][0]["nome"]] + 
+                               [b["nome"] for b in gpt["blocos_funcionais"][1:]])
+
+        return f"""<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>MY GPTS – Catalogação</title>
+  <style>
+    body {{
+      font-family: 'Segoe UI', sans-serif;
+      margin: 2cm;
+      background: #fff;
+      color: #2c3e50;
+    }}
+    header {{
+      border-bottom: 3px solid #2e86de;
+      margin-bottom: 2em;
+    }}
+    .logo {{
+      font-weight: bold;
+      font-size: 20px;
+      color: #154360;
+    }}
+    .institucional {{
+      font-size: 14px;
+      margin-top: 5px;
+      color: #2c3e50;
+    }}
+    h1 {{
+      font-size: 22px;
+      margin-top: 1.5em;
+    }}
+    .bloco {{
+      padding: 1em;
+      margin-top: 1em;
+      border-left: 5px solid #3498db;
+      background: #ecf0f1;
+      border-radius: 6px;
+    }}
+    .bloco span.tipo {{
+      font-weight: bold;
+      color: #2980b9;
+    }}
+    .fuzzy {{
+      font-size: 13px;
+      margin-top: 5px;
+      color: #555;
+    }}
+    .legenda, .metrica {{
+      margin-top: 2em;
+    }}
+    footer {{
+      margin-top: 3cm;
+      font-size: 11px;
+      color: #7f8c8d;
+      border-top: 1px solid #ccc;
+      padding-top: 0.5cm;
+      text-align: center;
+    }}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">ADM. JESUS MARTINS</div>
+    <div class="institucional">
+      MY GPTS – Catálogo de Blocos Funcionais Inteligentes<br>
+      Gerado a partir de modelos JSON estruturados
+    </div>
+  </header>
+
+  <h1>📋 Fluxo de Processo</h1>
+  {blocos_html}
+  <section class="legenda">
+    <h2>📈 Fluxo entre Blocos</h2>
+    <p>{fluxo_txt}</p>
+  </section>
+
+  <footer>
+    Relatório gerado automaticamente por MY GPTS – Plataforma ADM. JESUS MARTINS<br>
+    Data: 12/04/2025
+  </footer>
+</body>
+</html>"""
+
+    html_code = gerar_html(gpt_data)
+    st.download_button("📥 Baixar HTML Institucional", data=html_code, file_name="catalogo_mygpt.html", mime="text/html")
+    st.code(html_code, language="html")
+
