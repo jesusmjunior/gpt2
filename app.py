@@ -1,4 +1,3 @@
-# === app.py - Catálogo de MyGPTs ADM. JESUS MARTINS ===
 import streamlit as st
 import json
 import os
