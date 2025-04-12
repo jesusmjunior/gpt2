@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "Puzzle Python 2",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b25",
+      "nome": "Puzzle Python 2",
+      "tipo": "validação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.98,
+        "β": 0.79,
+        "γ": 0.75,
+        "δ": 0.87,
+        "ε": 0.77,
+        "θ": 0.97
+      },
+      "S(x)": 0.21
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b25"
+    ],
+    [
+      "b25",
+      "end"
+    ]
+  ]
+}

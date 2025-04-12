@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "Aplicação de Web Scraping para Pesquisa Jurídica",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b33",
+      "nome": "Aplicação de Web Scraping para Pesquisa Jurídica",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.89,
+        "β": 0.84,
+        "γ": 0.82,
+        "δ": 0.97,
+        "ε": 0.97,
+        "θ": 0.72
+      },
+      "S(x)": 0.04
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b33"
+    ],
+    [
+      "b33",
+      "end"
+    ]
+  ]
+}

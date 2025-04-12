@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "ASSISTENTE DE CONFIG DO DIALOGFLOW",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b39",
+      "nome": "ASSISTENTE DE CONFIG DO DIALOGFLOW",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.82,
+        "β": 0.97,
+        "γ": 0.74,
+        "δ": 0.9,
+        "ε": 0.71,
+        "θ": 0.77
+      },
+      "S(x)": 0.03
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b39"
+    ],
+    [
+      "b39",
+      "end"
+    ]
+  ]
+}

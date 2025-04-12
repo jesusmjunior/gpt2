@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "DASHBOARD UNIDADES INTERLIGADAS",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b27",
+      "nome": "DASHBOARD UNIDADES INTERLIGADAS",
+      "tipo": "validação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.89,
+        "β": 0.94,
+        "γ": 0.89,
+        "δ": 0.99,
+        "ε": 0.74,
+        "θ": 0.92
+      },
+      "S(x)": 0.4
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b27"
+    ],
+    [
+      "b27",
+      "end"
+    ]
+  ]
+}

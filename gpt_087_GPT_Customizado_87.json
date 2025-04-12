@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "GPT Customizado 87",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b87",
+      "nome": "GPT Customizado 87",
+      "tipo": "validação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.99,
+        "β": 0.83,
+        "γ": 0.87,
+        "δ": 0.83,
+        "ε": 0.98,
+        "θ": 0.97
+      },
+      "S(x)": 0.48
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b87"
+    ],
+    [
+      "b87",
+      "end"
+    ]
+  ]
+}

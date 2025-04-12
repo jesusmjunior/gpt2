@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "Orion Jarvis (assistente pessoal)",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b8",
+      "nome": "Orion Jarvis (assistente pessoal)",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.83,
+        "β": 0.92,
+        "γ": 0.86,
+        "δ": 0.78,
+        "ε": 0.78,
+        "θ": 0.7
+      },
+      "S(x)": 0.05
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b8"
+    ],
+    [
+      "b8",
+      "end"
+    ]
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "JJ BUSCA",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b11",
+      "nome": "JJ BUSCA",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.8,
+        "β": 0.98,
+        "γ": 0.8,
+        "δ": 0.88,
+        "ε": 0.85,
+        "θ": 0.73
+      },
+      "S(x)": 0.04
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b11"
+    ],
+    [
+      "b11",
+      "end"
+    ]
+  ]
+}

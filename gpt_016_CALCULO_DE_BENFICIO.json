@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "CALCULO DE BENFICIO",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b16",
+      "nome": "CALCULO DE BENFICIO",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.99,
+        "β": 0.75,
+        "γ": 0.92,
+        "δ": 0.93,
+        "ε": 0.96,
+        "θ": 0.89
+      },
+      "S(x)": 0.4
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b16"
+    ],
+    [
+      "b16",
+      "end"
+    ]
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "EXPORTAR DADOS DO CNIS E CARTA DE CONCESSÃO",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b18",
+      "nome": "EXPORTAR DADOS DO CNIS E CARTA DE CONCESSÃO",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.86,
+        "β": 0.76,
+        "γ": 0.91,
+        "δ": 0.81,
+        "ε": 0.78,
+        "θ": 0.82
+      },
+      "S(x)": 0.23
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b18"
+    ],
+    [
+      "b18",
+      "end"
+    ]
+  ]
+}

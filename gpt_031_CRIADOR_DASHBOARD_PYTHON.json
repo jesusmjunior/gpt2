@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "CRIADOR DASHBOARD PYTHON",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b31",
+      "nome": "CRIADOR DASHBOARD PYTHON",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.78,
+        "β": 0.93,
+        "γ": 0.73,
+        "δ": 0.87,
+        "ε": 0.74,
+        "θ": 0.72
+      },
+      "S(x)": 0.02
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b31"
+    ],
+    [
+      "b31",
+      "end"
+    ]
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "WEBHOOK ASSISTENTE",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b38",
+      "nome": "WEBHOOK ASSISTENTE",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.89,
+        "β": 0.92,
+        "γ": 0.85,
+        "δ": 0.71,
+        "ε": 0.76,
+        "θ": 0.76
+      },
+      "S(x)": 0.08
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b38"
+    ],
+    [
+      "b38",
+      "end"
+    ]
+  ]
+}

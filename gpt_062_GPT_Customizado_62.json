@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "GPT Customizado 62",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b62",
+      "nome": "GPT Customizado 62",
+      "tipo": "validação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.98,
+        "β": 0.72,
+        "γ": 0.93,
+        "δ": 0.87,
+        "ε": 0.8,
+        "θ": 0.93
+      },
+      "S(x)": 0.52
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b62"
+    ],
+    [
+      "b62",
+      "end"
+    ]
+  ]
+}

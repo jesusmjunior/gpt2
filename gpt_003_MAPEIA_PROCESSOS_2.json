@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "MAPEIA PROCESSOS 2",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b3",
+      "nome": "MAPEIA PROCESSOS 2",
+      "tipo": "validação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.86,
+        "β": 0.91,
+        "γ": 1.0,
+        "δ": 0.96,
+        "ε": 0.8,
+        "θ": 1.0
+      },
+      "S(x)": 0.82
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b3"
+    ],
+    [
+      "b3",
+      "end"
+    ]
+  ]
+}

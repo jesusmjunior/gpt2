@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "GPT Customizado 80",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b80",
+      "nome": "GPT Customizado 80",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.8,
+        "β": 0.73,
+        "γ": 0.86,
+        "δ": 0.85,
+        "ε": 0.96,
+        "θ": 0.8
+      },
+      "S(x)": 0.13
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b80"
+    ],
+    [
+      "b80",
+      "end"
+    ]
+  ]
+}

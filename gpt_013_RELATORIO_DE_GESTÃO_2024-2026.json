@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "RELATORIO DE GESTÃO 2024-2026",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b13",
+      "nome": "RELATORIO DE GESTÃO 2024-2026",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.87,
+        "β": 1.0,
+        "γ": 0.96,
+        "δ": 0.79,
+        "ε": 0.9,
+        "θ": 0.84
+      },
+      "S(x)": 0.38
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b13"
+    ],
+    [
+      "b13",
+      "end"
+    ]
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "GPT Customizado 53",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b53",
+      "nome": "GPT Customizado 53",
+      "tipo": "validação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.93,
+        "β": 0.76,
+        "γ": 0.71,
+        "δ": 0.91,
+        "ε": 0.94,
+        "θ": 0.94
+      },
+      "S(x)": 0.12
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b53"
+    ],
+    [
+      "b53",
+      "end"
+    ]
+  ]
+}

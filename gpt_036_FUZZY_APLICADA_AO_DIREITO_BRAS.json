@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "FUZZY APLICADA AO DIREITO BRASIILEIRO",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b36",
+      "nome": "FUZZY APLICADA AO DIREITO BRASIILEIRO",
+      "tipo": "validação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.79,
+        "β": 0.96,
+        "γ": 0.86,
+        "δ": 0.88,
+        "ε": 0.83,
+        "θ": 1.0
+      },
+      "S(x)": 0.52
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b36"
+    ],
+    [
+      "b36",
+      "end"
+    ]
+  ]
+}

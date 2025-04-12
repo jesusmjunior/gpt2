@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "GPT Customizado 52",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b52",
+      "nome": "GPT Customizado 52",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.88,
+        "β": 0.87,
+        "γ": 0.72,
+        "δ": 0.92,
+        "ε": 0.97,
+        "θ": 0.76
+      },
+      "S(x)": 0.02
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b52"
+    ],
+    [
+      "b52",
+      "end"
+    ]
+  ]
+}

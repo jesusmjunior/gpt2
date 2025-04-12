@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "POLIGLOTA - APP CONSTRUTOR",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b23",
+      "nome": "POLIGLOTA - APP CONSTRUTOR",
+      "tipo": "validação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.97,
+        "β": 0.8,
+        "γ": 0.83,
+        "δ": 0.92,
+        "ε": 0.97,
+        "θ": 0.95
+      },
+      "S(x)": 0.33
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b23"
+    ],
+    [
+      "b23",
+      "end"
+    ]
+  ]
+}

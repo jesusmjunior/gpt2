@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "PROGRAMADOR UNIVERSAL",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b5",
+      "nome": "PROGRAMADOR UNIVERSAL",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.77,
+        "β": 0.95,
+        "γ": 0.77,
+        "δ": 0.84,
+        "ε": 0.98,
+        "θ": 0.85
+      },
+      "S(x)": 0.09
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b5"
+    ],
+    [
+      "b5",
+      "end"
+    ]
+  ]
+}

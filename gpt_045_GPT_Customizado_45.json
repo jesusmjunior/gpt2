@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "GPT Customizado 45",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b45",
+      "nome": "GPT Customizado 45",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.79,
+        "β": 0.87,
+        "γ": 0.8,
+        "δ": 0.82,
+        "ε": 0.82,
+        "θ": 0.74
+      },
+      "S(x)": 0.04
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b45"
+    ],
+    [
+      "b45",
+      "end"
+    ]
+  ]
+}

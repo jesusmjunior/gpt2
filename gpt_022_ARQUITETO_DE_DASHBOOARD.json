@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "ARQUITETO DE DASHBOOARD",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b22",
+      "nome": "ARQUITETO DE DASHBOOARD",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.7,
+        "β": 0.89,
+        "γ": 0.81,
+        "δ": 0.77,
+        "ε": 0.97,
+        "θ": 0.79
+      },
+      "S(x)": 0.08
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b22"
+    ],
+    [
+      "b22",
+      "end"
+    ]
+  ]
+}

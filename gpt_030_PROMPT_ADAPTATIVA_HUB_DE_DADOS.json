@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "PROMPT ADAPTATIVA HUB DE DADOS – BI & BA",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b30",
+      "nome": "PROMPT ADAPTATIVA HUB DE DADOS – BI & BA",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.74,
+        "β": 0.87,
+        "γ": 0.75,
+        "δ": 1.0,
+        "ε": 0.8,
+        "θ": 0.84
+      },
+      "S(x)": 0.07
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b30"
+    ],
+    [
+      "b30",
+      "end"
+    ]
+  ]
+}

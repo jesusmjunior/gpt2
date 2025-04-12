@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "DR. EM APP SCRIPT",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b24",
+      "nome": "DR. EM APP SCRIPT",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.76,
+        "β": 0.84,
+        "γ": 0.83,
+        "δ": 0.82,
+        "ε": 0.83,
+        "θ": 0.74
+      },
+      "S(x)": 0.06
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b24"
+    ],
+    [
+      "b24",
+      "end"
+    ]
+  ]
+}

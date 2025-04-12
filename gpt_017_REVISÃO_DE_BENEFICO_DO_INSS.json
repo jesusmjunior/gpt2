@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "REVISÃO DE BENEFICO DO INSS",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b17",
+      "nome": "REVISÃO DE BENEFICO DO INSS",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.85,
+        "β": 0.75,
+        "γ": 0.85,
+        "δ": 0.7,
+        "ε": 0.82,
+        "θ": 0.88
+      },
+      "S(x)": 0.23
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b17"
+    ],
+    [
+      "b17",
+      "end"
+    ]
+  ]
+}

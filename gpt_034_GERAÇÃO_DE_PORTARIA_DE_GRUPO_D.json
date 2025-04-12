@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "GERAÇÃO DE PORTARIA DE GRUPO DA ESMAM",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b34",
+      "nome": "GERAÇÃO DE PORTARIA DE GRUPO DA ESMAM",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.75,
+        "β": 0.87,
+        "γ": 0.97,
+        "δ": 0.95,
+        "ε": 0.96,
+        "θ": 0.84
+      },
+      "S(x)": 0.4
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b34"
+    ],
+    [
+      "b34",
+      "end"
+    ]
+  ]
+}

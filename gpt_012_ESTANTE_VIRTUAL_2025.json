@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "ESTANTE VIRTUAL 2025",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b12",
+      "nome": "ESTANTE VIRTUAL 2025",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.88,
+        "β": 0.88,
+        "γ": 0.71,
+        "δ": 0.98,
+        "ε": 0.86,
+        "θ": 0.79
+      },
+      "S(x)": 0.03
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b12"
+    ],
+    [
+      "b12",
+      "end"
+    ]
+  ]
+}

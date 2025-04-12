@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "SCRUM AGENDA DA NOITE",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b19",
+      "nome": "SCRUM AGENDA DA NOITE",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.77,
+        "β": 0.9,
+        "γ": 0.99,
+        "δ": 0.79,
+        "ε": 0.9,
+        "θ": 0.71
+      },
+      "S(x)": 0.18
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b19"
+    ],
+    [
+      "b19",
+      "end"
+    ]
+  ]
+}

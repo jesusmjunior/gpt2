@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "GPT Customizado 60",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b60",
+      "nome": "GPT Customizado 60",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.79,
+        "β": 0.99,
+        "γ": 0.9,
+        "δ": 0.77,
+        "ε": 0.9,
+        "θ": 0.8
+      },
+      "S(x)": 0.18
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b60"
+    ],
+    [
+      "b60",
+      "end"
+    ]
+  ]
+}

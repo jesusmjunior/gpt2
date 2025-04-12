@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "MESTRE de obra do DIREITO BRASIILEIRO",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b37",
+      "nome": "MESTRE de obra do DIREITO BRASIILEIRO",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.75,
+        "β": 0.89,
+        "γ": 0.87,
+        "δ": 0.88,
+        "ε": 0.95,
+        "θ": 0.79
+      },
+      "S(x)": 0.13
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b37"
+    ],
+    [
+      "b37",
+      "end"
+    ]
+  ]
+}

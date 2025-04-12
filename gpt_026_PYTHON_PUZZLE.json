@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "PYTHON PUZZLE",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b26",
+      "nome": "PYTHON PUZZLE",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.89,
+        "β": 0.74,
+        "γ": 0.73,
+        "δ": 0.99,
+        "ε": 0.93,
+        "θ": 0.78
+      },
+      "S(x)": 0.03
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b26"
+    ],
+    [
+      "b26",
+      "end"
+    ]
+  ]
+}

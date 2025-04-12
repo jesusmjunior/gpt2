@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "GPT Customizado 41",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b41",
+      "nome": "GPT Customizado 41",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.9,
+        "β": 0.86,
+        "γ": 0.75,
+        "δ": 0.72,
+        "ε": 0.74,
+        "θ": 0.71
+      },
+      "S(x)": 0.02
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b41"
+    ],
+    [
+      "b41",
+      "end"
+    ]
+  ]
+}

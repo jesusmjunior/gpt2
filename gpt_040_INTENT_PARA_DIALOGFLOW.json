@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "INTENT PARA DIALOGFLOW",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b40",
+      "nome": "INTENT PARA DIALOGFLOW",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.97,
+        "β": 0.92,
+        "γ": 0.87,
+        "δ": 0.82,
+        "ε": 0.75,
+        "θ": 0.8
+      },
+      "S(x)": 0.14
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b40"
+    ],
+    [
+      "b40",
+      "end"
+    ]
+  ]
+}

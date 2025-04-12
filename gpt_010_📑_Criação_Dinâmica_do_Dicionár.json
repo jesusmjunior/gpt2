@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "📑 Criação Dinâmica do Dicionário de Dados",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b10",
+      "nome": "📑 Criação Dinâmica do Dicionário de Dados",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.92,
+        "β": 0.95,
+        "γ": 0.82,
+        "δ": 0.76,
+        "ε": 0.96,
+        "θ": 0.76
+      },
+      "S(x)": 0.06
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b10"
+    ],
+    [
+      "b10",
+      "end"
+    ]
+  ]
+}

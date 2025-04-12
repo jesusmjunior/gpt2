@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "INSS 3 - CALCULOS",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b14",
+      "nome": "INSS 3 - CALCULOS",
+      "tipo": "validação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.88,
+        "β": 0.83,
+        "γ": 0.81,
+        "δ": 0.87,
+        "ε": 0.96,
+        "θ": 0.99
+      },
+      "S(x)": 0.38
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b14"
+    ],
+    [
+      "b14",
+      "end"
+    ]
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "CRIAÇÃO DE CHATBOT JESUS",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b28",
+      "nome": "CRIAÇÃO DE CHATBOT JESUS",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.76,
+        "β": 0.73,
+        "γ": 0.74,
+        "δ": 0.8,
+        "ε": 0.77,
+        "θ": 0.72
+      },
+      "S(x)": 0.02
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b28"
+    ],
+    [
+      "b28",
+      "end"
+    ]
+  ]
+}

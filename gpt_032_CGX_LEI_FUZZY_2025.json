@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "CGX LEI FUZZY 2025",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b32",
+      "nome": "CGX LEI FUZZY 2025",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.95,
+        "β": 0.95,
+        "γ": 0.81,
+        "δ": 0.73,
+        "ε": 0.84,
+        "θ": 0.7
+      },
+      "S(x)": 0.03
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b32"
+    ],
+    [
+      "b32",
+      "end"
+    ]
+  ]
+}

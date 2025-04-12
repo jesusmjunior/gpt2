@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "MOTOR LÓGICO PROGRAMADOR",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b29",
+      "nome": "MOTOR LÓGICO PROGRAMADOR",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.8,
+        "β": 0.86,
+        "γ": 1.0,
+        "δ": 0.84,
+        "ε": 0.9,
+        "θ": 0.87
+      },
+      "S(x)": 0.55
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b29"
+    ],
+    [
+      "b29",
+      "end"
+    ]
+  ]
+}

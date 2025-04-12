@@ -1,0 +1,31 @@
+{
+  "nome_do_gpt": "MODELAGEM DICIONARIO DE ARTEFATOS JURIDICOS",
+  "categoria": "Automação com Inteligência Jurídica",
+  "blocos_funcionais": [
+    {
+      "id": "b35",
+      "nome": "MODELAGEM DICIONARIO DE ARTEFATOS JURIDICOS",
+      "tipo": "ação",
+      "descricao": "GPT institucional com lógica fuzzy aplicada para modelagem normativa",
+      "fuzzy": {
+        "α": 0.83,
+        "β": 0.97,
+        "γ": 0.82,
+        "δ": 0.74,
+        "ε": 0.83,
+        "θ": 0.75
+      },
+      "S(x)": 0.06
+    }
+  ],
+  "conexoes": [
+    [
+      "start",
+      "b35"
+    ],
+    [
+      "b35",
+      "end"
+    ]
+  ]
+}
