@@ -1,3 +1,4 @@
+# === app.py - Catálogo de MyGPTs ADM. JESUS MARTINS ===
 import streamlit as st
 import json
 import os
@@ -46,16 +47,12 @@ with tabs[0]:
 # === FLUXO ===
 with tabs[1]:
     st.subheader("🔗 Fluxo de Blocos")
-    dot_source = "digraph fluxo {
-rankdir=LR;
-"
+    dot_source = "digraph fluxo {\n  rankdir=LR;\n"
     for b in gpt_data["blocos_funcionais"]:
-        dot_source += f'{b["id"]} [label="{b["nome"]}"];
-'
+        dot_source += f'  {b["id"]} [label="{b["nome"]}"];\n'
     for origem, destino in gpt_data["conexoes"]:
-        dot_source += f"{origem} -> {destino};
-"
-    dot_source += "}"
+        dot_source += f"  {origem} -> {destino};\n"
+    dot_source += "}\n"
     st.graphviz_chart(dot_source)
 
 # === FUZZY α → θ ===
