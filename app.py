@@ -8,14 +8,11 @@ import pandas as pd
 import base64
 import re
 # ===== P(p): Main Application Process =====
-def minha_funcao():
+def main_application():
     """
-    Esta função ainda será implementada.
-    """
-    pass  # ou outro código
 P(p): Core application process orchestrating the entire GPT catalog flow
 Contains: UI Rendering, GPT Data Processing, Export Functions
-"""
+    """
 # R(r): Application Requirements
 configure_app_settings()
 # S(s): Header Subsequence
@@ -34,9 +31,9 @@ process_export_options(gpt_data, selected_gpt)
 render_support_elements()
 # ===== T(a): Configuration Tasks =====
 def configure_app_settings():
-"""
+    """
 T(a): Sets up application configuration and styling
-"""
+    """
 st.set_page_config(
 page_title="Catálogo de GPTs - Sistema de Gerenciamento",
 layout="centered",
@@ -46,7 +43,7 @@ initial_sidebar_state="collapsed"
 st.markdown("""
 <style>
 .main {
-max-width: 950px;
+        max-width: 950px;
 margin: auto;
 padding-top: 1.5rem;
 }
@@ -213,12 +210,12 @@ font-size: 0.8rem;
 color: #7f8c8d;
 }
 </style>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 # ===== T(a): Header Rendering =====
 def render_institutional_header():
-"""
+    """
 T(a): Creates the institutional header with logo and title
-"""
+    """
 st.markdown('<div class="header-container">', unsafe_allow_html=True)
 col_logo, col_texto = st.columns([1, 3])
 with col_logo:
@@ -248,14 +245,14 @@ st.markdown(f"""
 <div class="stat-number">{stat['number']}</div>
 <div class="stat-label">{stat['label']}</div>
 </div>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
 # ===== T(a): Navigation Tasks =====
 def process_navigation_selection():
-"""
+    """
 T(a): Processes user navigation and GPT selection
 Returns: Selected GPT or None
-"""
+    """
 st.markdown("### 📂 Navegação e Pesquisa de GPTs")
 # Create tabs for different selection methods
 tab_browse, tab_search, tab_categories = st.tabs(["Todos GPTs", "Pesquisa Avançada",
@@ -309,9 +306,9 @@ return None
 return gpt_selecionado
 # ===== T(a): GPT Name Extraction =====
 def extract_gpt_name(filename):
-"""
+    """
 T(a): Extracts a friendly name from GPT filename
-"""
+    """
 try:
 with open(filename, encoding='utf-8') as f:
 data = json.load(f)
@@ -320,9 +317,9 @@ except:
 return filename.replace(".json", "").replace("gpt_", "")
 # ===== T(a): Category Check =====
 def categoria_em_arquivo(filename, categoria):
-"""
+    """
 T(a): Checks if a file belongs to a category
-"""
+    """
 try:
 with open(filename, encoding='utf-8') as f:
 data = json.load(f)
@@ -331,10 +328,10 @@ except:
 return False
 # ===== T(a): JSON Content Search =====
 def search_in_json_content(filename, query):
-"""
+    """
 T(a): Searches for query within JSON file content
 Returns: Boolean indicating if query was found
-"""
+    """
 try:
 with open(filename, encoding='utf-8') as f:
 data = json.load(f)
@@ -344,16 +341,17 @@ except:
 return False
 # ===== S(s): GPT Rendering Subsequence =====
 def process_gpt_rendering(selected_gpt):
-"""
+    """
 S(s): Processes and renders the selected GPT
 Returns: GPT data or None on error
-"""
+    """
 try:
 # T(a): Load and validate GPT data
 with open(selected_gpt, encoding='utf-8') as f:
 dados = json.load(f)
 if not "nome_do_gpt" in dados:
-st.error("O arquivo JSON selecionado não contém a estrutura necessária para um GPT.")
+st.error("O arquivo JSON selecionado não contém a estrutura necessária para um")
+GPT.")
 return None
 # T(a): Display GPT metadata
 st.markdown(f"## 🤖 {dados.get('nome_do_gpt', 'GPT sem nome')}")
@@ -366,7 +364,8 @@ unsafe_allow_html=True)
 st.markdown(f"**Categoria:** {categoria}", unsafe_allow_html=True)
 st.markdown("</div>", unsafe_allow_html=True)
 # T(a): Render visualization tabs
-tab_details, tab_blocks, tab_actions = st.tabs(["Detalhes", "Blocos Funcionais", "Ações"])
+tab_details, tab_blocks, tab_actions = st.tabs(["Detalhes", "Blocos Funcionais", "Ações
+Rápidas"])
 with tab_details:
 render_gpt_details(dados)
 with tab_blocks:
@@ -383,9 +382,9 @@ st.error(f"❌ Erro ao carregar ou renderizar o GPT: {str(e)}")
 return None
 # ===== T(a): GPT Details Rendering =====
 def render_gpt_details(dados):
-"""
+    """
 T(a): Renders detailed information about the GPT
-"""
+    """
 st.subheader("📋 Informações Detalhadas")
 # Simulating additional fields that might be in a fuller implementation
 descricao = "GPT institucional com lógica fuzzy aplicada para modelagem normativa"
@@ -415,7 +414,7 @@ st.markdown("""
 - **12/04/2025**: Atualização de parâmetros fuzzy
 - **04/04/2025**: Correção de bugs na geração de documentos
 - **28/03/2025**: Inclusão de novos modelos normativos
-""")
+    """)
 # Integration information
 st.markdown("### 🔌 Integrações")
 st.markdown("Este GPT pode ser integrado com:")
@@ -423,12 +422,12 @@ st.markdown("""
 - Sistema de Gestão de Documentos
 - Plataforma Jurídica
 - API de Processamento de Linguagem Natural
-""")
+    """)
 # ===== T(a): Functional Blocks Rendering =====
 def render_functional_blocks(dados):
-"""
+    """
 T(a): Renders functional blocks of the GPT
-"""
+    """
 st.subheader("⚙️ Blocos Funcionais")
 if "blocos_funcionais" not in dados or not dados["blocos_funcionais"]:
 st.info("Este GPT não possui blocos funcionais definidos.")
@@ -486,9 +485,9 @@ fluxo.edge(origem, destino)
 st.graphviz_chart(fluxo, use_container_width=True)
 # ===== T(a): Action Buttons Rendering =====
 def render_action_buttons(dados):
-"""
+    """
 T(a): Renders action buttons for GPT
-"""
+    """
 st.subheader("🚀 Ações Rápidas")
 # Create columns for buttons
 col1, col2, col3 = st.columns(3)
@@ -518,13 +517,13 @@ temperature=0.7,
 max_tokens=500
 )
 print(response.choices[0].message.content)
-"""
+    """
 st.code(integration_code, language="python")
 # ===== S(s): Export Options Subsequence =====
 def process_export_options(gpt_data, selected_gpt):
-"""
+    """
 S(s): Process and provides export options
-"""
+    """
 st.markdown("---")
 st.subheader("📤 Opções de Exportação")
 export_col1, export_col2 = st.columns(2)
@@ -536,9 +535,9 @@ if st.button("📊 Exportar como JSON Técnico"):
 export_technical_json(gpt_data, selected_gpt)
 # ===== T(a): HTML Export =====
 def export_html_documentation(gpt_data, selected_gpt):
-"""
+    """
 T(a): Exports GPT as HTML documentation
-"""
+    """
 dados = gpt_data["dados"]
 categoria = gpt_data["categoria"]
 # Generate enhanced HTML with semantic structures
@@ -554,7 +553,7 @@ url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&displa
 ');
 body {{
 font-family: 'Roboto', Arial, sans-serif;
-max-width: 21cm;
+        max-width: 950px;
 min-height: 29.7cm;
 margin: 1cm auto;
 background: #fff;
@@ -687,7 +686,7 @@ Logo">
 <div class="categoria"><strong>Categoria:</strong> {categoria}</div>
 <div class="details-box">
 <h3>📝 Descrição e Detalhes</h3>
-"""
+    """
 # Add description
 descricao = "GPT institucional com lógica fuzzy aplicada para modelagem normativa"
 if "blocos_funcionais" in dados and len(dados["blocos_funcionais"]) > 0:
