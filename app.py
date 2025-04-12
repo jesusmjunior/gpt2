@@ -1,74 +1,69 @@
+# === app.py - Catálogo e Visualização de MyGPTs com lógica fuzzy α → θ ===
 import streamlit as st
 import json
 import os
 import pandas as pd
 from graphviz import Digraph
 
-def carregar_arquivo():
-    st.sidebar.header("📂 Importar MyGPT")
-    arquivos = [f for f in os.listdir() if f.endswith(".json")]
-    arquivo_escolhido = st.sidebar.selectbox("Escolha um arquivo JSON", arquivos)
-    if arquivo_escolhido:
-        with open(arquivo_escolhido, "r", encoding="utf-8") as f:
-            return json.load(f), arquivo_escolhido
-    return None, None
+st.set_page_config("🧠 Catálogo de MyGPTs", layout="wide")
 
-def renderizar_fluxo(dados):
-    st.header(f"🧠 {dados['nome_do_gpt']}")
-    st.subheader(f"📚 Categoria: {dados['categoria']}")
+st.title("🧠 MyGPTs – COGEX")
+st.markdown("Sistema de visualização fuzzy de blocos funcionais para GPTs personalizados")
 
-    tabs = st.tabs(["📋 Lista de Blocos", "🔗 Conexões", "📈 Fuzzy α → θ"])
+# === Carregamento ===
+arquivos = [f for f in os.listdir() if f.endswith(".json")]
+arquivo_escolhido = st.sidebar.selectbox("📂 Selecione um MyGPT", arquivos)
 
-    with tabs[0]:
-        for bloco in dados["blocos_funcionais"]:
-            with st.expander(f"🔹 {bloco['nome']} ({bloco['tipo']})"):
-                st.markdown(f"📝 **Descrição**: {bloco['descricao']}")
-                st.markdown(f"💠 **Pertinência Semântica S(x)**: `{bloco['S(x)']}`")
-                st.json(bloco['fuzzy'], expanded=False)
+if not arquivo_escolhido:
+    st.warning("Nenhum arquivo selecionado.")
+    st.stop()
 
-    with tabs[1]:
-        st.subheader("🔗 Fluxo entre Blocos")
-        g = Digraph("fluxo", format="png")
-        g.attr(rankdir="LR", size="10")
-        for bloco in dados["blocos_funcionais"]:
-            g.node(bloco["id"], bloco["nome"])
-        for origem, destino in dados["conexoes"]:
-            g.edge(origem, destino)
-        st.graphviz_chart(g)
+with open(arquivo_escolhido, encoding='utf-8') as f:
+    gpt_data = json.load(f)
 
-    with tabs[2]:
-        df_fuzzy = pd.DataFrame([
-            {**b["fuzzy"], "Bloco": b["nome"], "S(x)": b["S(x)"]} 
-            for b in dados["blocos_funcionais"]
-        ])
-        st.dataframe(df_fuzzy.set_index("Bloco"))
+# === Cabeçalho ===
+st.header(f"📌 Nome: {gpt_data['nome_do_gpt']}")
+st.subheader(f"📚 Categoria: {gpt_data['categoria']}")
 
-def exportar_json_semantico(dados, nome_arquivo):
-    novo = {
-        "gpt_nome": dados["nome_do_gpt"],
-        "categoria": dados["categoria"],
-        "blocos": dados["blocos_funcionais"],
-        "conexoes": dados["conexoes"],
-        "pontuacao_media": sum(b["S(x)"] for b in dados["blocos_funcionais"]) / len(dados["blocos_funcionais"])
+# === Tabs: Blocos, Fluxo, Fuzzy ===
+tabs = st.tabs(["📋 Blocos", "🔁 Fluxo", "📊 Fuzzy α → θ"])
+
+with tabs[0]:
+    for bloco in gpt_data["blocos_funcionais"]:
+        with st.expander(f"🔹 {bloco['nome']} ({bloco['tipo']})"):
+            st.markdown(f"📝 {bloco['descricao']}")
+            st.write("🔬 Pertinência S(x):", bloco["S(x)"])
+            st.json(bloco["fuzzy"])
+
+with tabs[1]:
+    st.subheader("🔗 Fluxo de Blocos")
+    graph = Digraph("fluxo", format="png")
+    graph.attr(rankdir="LR")
+    for b in gpt_data["blocos_funcionais"]:
+        graph.node(b["id"], f"{b['nome']}")
+    for c in gpt_data["conexoes"]:
+        graph.edge(c[0], c[1])
+    st.graphviz_chart(graph)
+
+with tabs[2]:
+    df_fuzzy = pd.DataFrame([
+        {**b["fuzzy"], "Bloco": b["nome"], "S(x)": b["S(x)"]} for b in gpt_data["blocos_funcionais"]
+    ])
+    st.dataframe(df_fuzzy.set_index("Bloco"))
+
+# === Exportação JSON Técnico ===
+st.markdown("---")
+st.subheader("📤 Exportar MyGPT com pontuação α → θ")
+if st.button("🔽 Exportar JSON Semântico"):
+    export_data = {
+        "nome_do_gpt": gpt_data["nome_do_gpt"],
+        "categoria": gpt_data["categoria"],
+        "media_S(x)": sum(b["S(x)"] for b in gpt_data["blocos_funcionais"]) / len(gpt_data["blocos_funcionais"]),
+        "blocos": gpt_data["blocos_funcionais"],
+        "conexoes": gpt_data["conexoes"]
     }
-    nome_export = nome_arquivo.replace(".json", "_semantico.json")
-    with open(nome_export, "w", encoding="utf-8") as f:
-        json.dump(novo, f, indent=2, ensure_ascii=False)
-    with open(nome_export, "rb") as f:
-        st.download_button("📤 Baixar JSON Semântico", f, file_name=nome_export)
-
-# === Execução ===
-def main():
-    st.set_page_config("MyGPT Catalogador COGEX", layout="wide")
-    st.markdown("# 🤖 Catálogo de MyGPTs – COGEX")
-    st.markdown("Sistema fuzzy de análise e exibição de GPTs personalizados com exportação semântica.")
-
-    dados, nome_arquivo = carregar_arquivo()
-    if dados:
-        renderizar_fluxo(dados)
-        exportar_json_semantico(dados, nome_arquivo)
-    else:
-        st.warning("Nenhum JSON carregado.")
-
-if __name__ == "__main__":
-    main()
+    export_file = f"{gpt_data['nome_do_gpt'].replace(' ', '_')}_semantico.json"
+    with open(export_file, "w", encoding="utf-8") as f:
+        json.dump(export_data, f, ensure_ascii=False, indent=2)
+    with open(export_file, "rb") as f:
+        st.download_button("📥 Baixar JSON", f, file_name=export_file)
