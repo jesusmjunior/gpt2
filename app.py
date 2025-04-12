@@ -30,51 +30,14 @@ with col2:
     - Breve descrição funcional
     """)
 
-# JSON atualizado
-catalogo = {
-  "nome_do_gpt": "GPT - Implementador de Normas Inteligentes",
-  "categoria": "Automação com Inteligência Jurídica",
-  "função_principal": "Auxiliar na disseminação normativa baseada em provimentos oficiais com ações de publicação, atualização e acompanhamento",
-  "blocos_funcionais": [
-    {
-      "id": "start",
-      "tipo": "inicio",
-      "texto": "Início – Ativação do GPT com base em Provimento nº 10/2024"
-    },
-    {
-      "id": "b1",
-      "tipo": "ação",
-      "texto": "1. Análise e Consolidação Técnica\n- Geração de parecer normativo\n- Estruturação do texto jurídico"
-    },
-    {
-      "id": "b2",
-      "tipo": "output",
-      "texto": "2. Comunicação Oficial\n- Elaboração de post + ofício automatizado\n- Criação de conteúdos visuais e explicativos"
-    },
-    {
-      "id": "b3",
-      "tipo": "validação",
-      "texto": "3. Atualização de Modelos\n- Inserção em roteiros de GPT Fiscalizador\n- Validação semântica das regras"
-    },
-    {
-      "id": "b4",
-      "tipo": "ação",
-      "texto": "4. Acompanhamento e Adaptação\n- Análise dos prompts recebidos\n- Ajustes conforme feedback normativo"
-    },
-    {
-      "id": "end",
-      "tipo": "fim",
-      "texto": "Encerramento – GPT pronto para replicação normativa inteligente"
-    }
-  ],
-  "conexoes": [
-    ["start", "b1"],
-    ["b1", "b2"],
-    ["b2", "b3"],
-    ["b3", "b4"],
-    ["b4", "end"]
-  ]
-}
+# Carregar JSON externo
+json_path = "gpt_fluxo_normas.json"
+if not os.path.exists(json_path):
+    st.error(f"Arquivo {json_path} não encontrado.")
+    st.stop()
+
+with open(json_path, "r", encoding="utf-8") as f:
+    catalogo = json.load(f)
 
 # Renderizar fluxo visual
 st.header(f"🔷 {catalogo['nome_do_gpt']}")
@@ -87,8 +50,6 @@ grafo.node("GPT", catalogo['nome_do_gpt'], shape='folder', style='filled', fillc
 
 for bloco in catalogo['blocos_funcionais']:
     grafo.node(bloco['id'], bloco['texto'], shape='box', style='filled', fillcolor='lightgrey')
-    if bloco['id'] != "GPT":
-        grafo.edge("GPT" if bloco['id'] == "start" else None, bloco['id'])
 
 for origem, destino in catalogo['conexoes']:
     grafo.edge(origem, destino)
